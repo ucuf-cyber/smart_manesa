@@ -14,7 +14,7 @@ Aplikasi ini dibuat dengan CodeIgniter 3, MySQL, dan template AdminLTE.
 
 1. Operator menentukan kriteria penilaian beserta bobotnya.
 2. Setiap kriteria punya sub kriteria (rentang nilai) dengan skor 0 sampai 100.
-3. Wali kelas / wakasek memasukkan nilai siswa sesuai sub kriteria.
+3. Wali kelas mengisi nilai raport, ujian sekolah, dan presensi. Wakasek mengisi nilai ekstrakurikuler dan prestasi.
 4. Sistem menghitung skor akhir: **nilai sub kriteria × bobot normalisasi**, lalu dijumlahkan untuk semua kriteria.
 5. Siswa dengan skor **75 – 100** berstatus **diterima**, sedangkan skor **0 – 74** berstatus **ditolak**.
 6. Hasilnya diurutkan dari skor tertinggi (ranking) dan bisa dicetak sebagai laporan.
@@ -40,8 +40,8 @@ Ada empat jenis pengguna, dan menu yang muncul menyesuaikan perannya masing-masi
 | Peran              | Yang bisa dilakukan |
 | ------------------ | ------------------- |
 | **Operator**       | Kelola kriteria, sub kriteria, tahun akademik, kelas, data siswa, data user, melihat hasil penilaian dan laporan |
-| **Wali Kelas**     | Kelola data siswa dan input penilaian |
-| **Wakasek**        | Kelola data siswa dan input penilaian |
+| **Wali Kelas**     | Kelola data siswa, input nilai raport, ujian sekolah, dan presensi |
+| **Wakasek**        | Kelola data siswa, input nilai ekstrakurikuler dan prestasi |
 | **Kepala Sekolah** | Melihat data siswa, hasil penilaian, dan mencetak laporan |
 
 ---
@@ -54,7 +54,7 @@ Setiap pengguna masuk dengan username dan password. Setelah login, sistem langsu
 ![Halaman Login](docs/screenshots/login.png)
 
 ### 2. Dashboard
-Menampilkan ringkasan jumlah data siswa, kriteria, kelas, dan user. Ada juga grafik pie untuk melihat perbandingan siswa yang diterima dan ditolak.
+Menampilkan ringkasan jumlah data siswa, kriteria, kelas, dan user. Di bawahnya ada grafik jumlah siswa per kelas.
 
 ![Dashboard](docs/screenshots/dashboard.png)
 
@@ -79,24 +79,32 @@ Mengelola daftar kelas yang nantinya dipakai untuk mengelompokkan siswa.
 ![Data Kelas](docs/screenshots/kelas.png)
 
 ### 7. Data Siswa
-Menyimpan data siswa lengkap dengan kelasnya. Data bisa ditambah satu per satu, atau diimpor sekaligus lewat file Excel. Daftar siswa juga bisa diekspor ke Excel.
+Menyimpan data siswa berupa NISN, nama, dan kelas. Data bisa ditambah, diubah, dihapus, dan diekspor ke Excel.
 
 ![Data Siswa](docs/screenshots/data-siswa.png)
 
 ### 8. Penilaian
-Wali kelas atau wakasek memilih siswa lalu mengisi nilainya untuk tiap kriteria. Nama siswa bisa dicari dengan fitur autocomplete, jadi tidak perlu mengetik lengkap.
+Penilaian dibagi sesuai peran. Wali kelas mengisi nilai akademik dan kehadiran, sedangkan wakasek mengisi nilai ekstrakurikuler dan prestasi. Daftarnya menampilkan nilai yang sudah masuk untuk tiap siswa.
 
 ![Penilaian](docs/screenshots/penilaian.png)
 
+Untuk menambah nilai, cukup pilih siswa yang belum dinilai lalu pilih sub kriteria dari dropdown. Siswa yang sudah dinilai tidak muncul lagi di pilihan, jadi tidak ada data dobel.
+
+![Tambah Penilaian](docs/screenshots/tambah-penilaian.png)
+
 ### 9. Hasil Penilaian
-Menampilkan skor akhir setiap siswa, status diterima/ditolak, serta ranking. Hasil bisa difilter per kelas dan diekspor ke Excel.
+Menampilkan nilai setiap siswa per kriteria beserta bobotnya, skor akhir, dan ranking. Data sudah urut dari skor tertinggi. Kolom filter dipakai untuk menampilkan sejumlah siswa teratas saja, misalnya 10 besar.
 
 ![Hasil Penilaian](docs/screenshots/hasil-penilaian.png)
 
 ### 10. Laporan
-Laporan hasil penentuan lulusan terbaik bisa dicetak ke PDF, lengkap dengan kop sekolah. Laporan juga bisa difilter sebelum dicetak.
+Masukkan jumlah lulusan terbaik yang mau dicetak, lalu klik Cetak.
 
 ![Laporan](docs/screenshots/laporan.png)
+
+Hasilnya berupa PDF dengan kop Dinas Pendidikan Jawa Barat dan SMA Negeri 1 Mandirancan, berisi daftar lulusan terbaik lengkap dengan nilai, skor akhir, dan ranking.
+
+![Laporan PDF](docs/screenshots/laporan-pdf.png)
 
 ### 11. Data User
 Operator bisa menambah, mengubah, atau menghapus akun pengguna sekaligus menentukan perannya.
@@ -113,7 +121,7 @@ Operator bisa menambah, mengubah, atau menghapus akun pengguna sekaligus menentu
 - DataTables untuk tabel
 - Google Charts untuk grafik dashboard
 - Dompdf untuk cetak PDF
-- PHPExcel untuk impor dan ekspor Excel
+- PHPExcel untuk ekspor Excel
 
 ---
 
